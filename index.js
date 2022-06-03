@@ -1,5 +1,5 @@
 const Password = require("./src/class/Password");
-const pass = "Leandroveron1234@gmail_com";
+const pass = "Leandro_veron$1234";
 
 
 const classPass = new Password(pass);
