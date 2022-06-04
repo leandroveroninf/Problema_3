@@ -12,7 +12,7 @@ class CaracteresExpeciales{
      */
     includesCarEspConceutivo(pass){
         if(!Array.isArray(pass)) throw new Error("El parametro pasado no es un arrays");
-        return this.includesCarEspNoRepetido(pass) && !this.letraConsec(pass);
+        return this.includesCarEspNoRepetido(pass) && !this.letraConsec(pass) && !this.caracEsCons(pass);
     }
 
     /**
@@ -28,6 +28,15 @@ class CaracteresExpeciales{
         return false;
     }
 
+    caracEsCons(password_){
+        const pass = password_;
+        for(let i = 0; i < pass.length; i++){
+            if(this.dt.includes(pass[i]) && this.dt.includes(pass[i+1])) return true
+        }
+        return false;
+    }
+
+
     /**
      * 
      * @param {Arrays} pass 
@@ -36,10 +45,7 @@ class CaracteresExpeciales{
     includesCarEspNoRepetido(pass){
         if(!Array.isArray(pass)) throw new Error("El parametro pasado no es un arrays");
         
-        const filt = pass.filter((elm)=>{
-            if(this.dt.includes(elm)) return elm;
-            
-        })
+        const filt = pass.filter((elm)=>this.dt.includes(elm));
 
         if(filt.length === 0) return false;
         return new Set(filt).size === filt.length && filt.length >= 2

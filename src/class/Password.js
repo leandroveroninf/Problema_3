@@ -4,7 +4,7 @@ const CaracteresExpeciales = require("../module/CaracteresExpeciales");
  * Clase con metodos de la password para poder usar un metodo en general con todos los demas incluidos o poder usar
  * cada uno individualmente
  */
-class ClassPassword{
+ class ClassPassword{
     
     /**
      * 
@@ -27,16 +27,17 @@ class ClassPassword{
      * @param {Arrays} pass 
      * @description retornara true si todo sale bien, de lo contrario retornara un objeto con los errores de las password
      */
-    passMaxSeguridad(){
+    passMaxSeguridad(pass_ = this.pass){
+        const pass = pass_.split("") || this.pass;
         const caracEspe = new CaracteresExpeciales();
-        if(!this.minCaracter(this.pass)) this.objErrors.errorLong = 'La contraseña tiene que ser mayor a 16 caracteres';
-        if(!this.mayMin(this.pass)) this.objErrors.errorMayMin = 'La contraseña tiene que tener mayuscualas y minisculas';
-        if(this.letraConsec(this.pass)) this.objErrors.errorConse = 'La constraseña no puede tener letras consecutivas';
-        if(!this.minimoNumeros(this.pass)) this.objErrors.errorNumMin = 'La contraseña tiene que tener un minimo de 4 numeros';
-        if(this.numConsec(this.pass)) this.objErrors.errorNumsConat = "La contraseña no puede tener numeros concatenados";
-        if(!caracEspe.includesCarEspConceutivo(this.pass)) this.objErrors.errorCarrEsp = "Debe tener al menos 2 caracteres especiales (!@#$%ˆ&*-_+=?) pero ninguno de ellos puede repetirse en ninguna posición y además los caracteres no pueden estar juntos.";
-        if(this.sinCero(this.pass)) this.objErrors.errorSinCero = "No se puede usar el número 0.";
-        if(this.sinEspacio(this.pass)) this.objErrors.errorSinEspacio = "No se puede colocar espacios.";
+        if(!this.minCaracter(pass)) this.objErrors.errorLong = 'La contraseña tiene que ser mayor a 16 caracteres';
+        if(!this.mayMin(pass)) this.objErrors.errorMayMin = 'La contraseña tiene que tener mayuscualas y minisculas';
+        if(this.letraConsec(pass)) this.objErrors.errorConse = 'La constraseña no puede tener letras consecutivas';
+        if(!this.minimoNumeros(pass)) this.objErrors.errorNumMin = 'La contraseña tiene que tener un minimo de 4 numeros';
+        if(this.numConsec(pass)) this.objErrors.errorNumsConat = "La contraseña no puede tener numeros concatenados";
+        if(!caracEspe.includesCarEspConceutivo(pass)) this.objErrors.errorCarrEsp = "Debe tener al menos 2 caracteres especiales (!@#$%ˆ&*-_+=?) pero ninguno de ellos puede repetirse en ninguna posición y además los caracteres no pueden estar juntos.";
+        if(this.sinCero(pass)) this.objErrors.errorSinCero = "No se puede usar el número 0.";
+        if(this.sinEspacio(pass)) this.objErrors.errorSinEspacio = "No se puede colocar espacios.";
 
         const arrObj = Object.keys(this.objErrors);
 
@@ -141,5 +142,4 @@ class ClassPassword{
 
 
 }
-
 module.exports = ClassPassword
